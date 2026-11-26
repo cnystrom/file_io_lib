@@ -34,7 +34,7 @@ int main(void)
 	CHECK(get_home_dir(home) == (int) strlen("/tmp/fiotest-home"));
 	CHECK(strcmp(home, "/tmp/fiotest-home") == 0);
 
-	/* 1.0 fix: with HOME unset it called strlen(NULL) and crashed */
+	/* 1.1 fix: with HOME unset it called strlen(NULL) and crashed */
 	{
 		struct passwd *pw = getpwuid(getuid());
 		const char *want = (pw && pw->pw_dir) ? pw->pw_dir : "";

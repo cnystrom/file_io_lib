@@ -1,6 +1,11 @@
 # file_io_lib: home directory, file and path helpers
 
-Version 1.0 (2026). Split from NewIO 0.12, https://github.com/cnystrom/newio
+Version 1.1 (2026). Split from NewIO 0.12, https://github.com/cnystrom/newio
+
+## Versions
+
+- **1.0:** original code as published in NewIO 0.12 (tag `v1.0`).
+- **1.1:** this release, with the fixes listed below. See `CHANGES.md`.
 
 file_io_lib holds NewIO's small file helpers: find the home directory,
 test whether a file exists, create a directory if it is missing, take a
@@ -20,7 +25,7 @@ From `file_io_lib.h`:
 | `size_t pathcpy(path dst, const char_ptr src)` | `strlcpy` into a `path` (`char[256]`). |
 | `size_t pathcat(path dst, const char_ptr src)` | `strlcat` onto a `path`. |
 
-`file_io_lib_version.h` defines `FILE_IO_LIB_VERSION` ("1.0") and
+`file_io_lib_version.h` defines `FILE_IO_LIB_VERSION` ("1.1") and
 `FILE_IO_LIB_ORIGIN`.
 
 ## Dependencies
@@ -48,7 +53,7 @@ When unpacked from the release tarballs, the directory names include the
 version, so give the sibling paths:
 
 ```sh
-make STR_LIB_DIR=../str_lib-1.0 LOG_LIB_DIR=../log_lib-1.0 test
+make STR_LIB_DIR=../str_lib-1.1 LOG_LIB_DIR=../log_lib-1.1 test
 ```
 
 The code needs `-DUNIX` on Linux, BSD and macOS, as in NewIO. The `Makefile`
@@ -74,7 +79,7 @@ Contact: Chris Nystrom <cnystrom@gmail.com>
 - `misc_io.c:42`: `#include "../nio_log/nio_log.h"` became
   `#include "log_lib.h"`. The `nio_log_print` calls are unchanged and work
   through log_lib's compatibility names.
-- `misc_io.c:37-39` and `:129-132`: bug fix, see "Fixed in 1.0".
+- `misc_io.c:37-39` and `:129-132`: bug fix, see "Fixed in 1.1".
 - Removed two old personal contact lines (a web-log URL and a chat handle) from the file headers, at Chris's request (2026). The rest of each header and the authorship are unchanged, so header-area line numbers are 2 lower than in NewIO.
 - `Makefile:34-36`: `-I.. -I../str_lib` became `-I. -I$(STR_LIB_DIR)
   -I$(LOG_LIB_DIR)`.
@@ -85,7 +90,7 @@ Contact: Chris Nystrom <cnystrom@gmail.com>
 - Left as is: gcc and clang warn that `i` is set but not used
   (`misc_io.c:94`). It's harmless.
 
-## Fixed in 1.0
+## Fixed in 1.1
 
 - **`get_home_dir()` crashed when `HOME` was unset** (`misc_io.c:37-39`,
   `:129-132`). It logged a message and then called `strlen(NULL)`. It now
